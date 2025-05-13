@@ -1,0 +1,118 @@
+/* Sidebar */
+.sidebar {
+    background-color: rgb(255, 255, 255);
+    max-width: 100%;
+    border-top-right-radius: 20px;
+    margin-top: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;  
+    transition: width 0.3s ease; 
+    width: 89px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar:hover {
+    width: 250px; 
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+.sidebar:not(:hover) .sidebar__element.active {
+    /* border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px; */
+    border-radius: 30px 0 0 30px;
+    margin-right: -1px;
+    background-color: #E8EAEF;
+    color:#1181ad;
+
+}
+
+/* Scrollbar style */
+.sidebar::-webkit-scrollbar {
+    width: 5px; 
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent;  /* Transparent scrollbar thumb */
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;  /* Transparent scrollbar track */
+}
+
+/* Element grid transition */
+.sidebar:hover .sidebar__element {
+    grid-template-columns: 40px 1fr; 
+}
+
+/* Sidebar list and elements */
+.sidebar__list {
+    list-style: none;
+    padding: 0;
+    min-height: 600px;
+    /* display: flex; */
+    flex-direction: column;
+    gap: 0.4rem;
+    
+}
+
+.sidebar__element {
+    padding: 0.8rem 1.3rem;
+    border-radius: 3px;
+    margin-left: 10px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 40px 0fr;
+    color: #334155;
+    transition: grid-template-columns 0.3s ease;  /* Smooth transition for the grid */
+}
+
+.sidebar__element:not(:has(.sidebar__icon--logo)):hover {
+    background-color: #e2e8f09b;  /* Background on hover */
+    /* color: #fff;
+    fill: #fff; */
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.sidebar__element:has(.sidebar__icon--logo) {
+    /* margin-bottom: 1rem; */
+    margin-left: 15px;
+}
+
+.sidebar__icon {
+    width: 300px;
+    overflow: hidden;
+    justify-self: center;
+}
+
+.sidebar__icon--logo {
+    max-width: 95px;
+}
+
+
+.sidebar__logo, .sidebar__text {
+    padding-left: 1.3rem;
+}
+
+.sidebar__hide {
+    overflow: hidden;
+}
+
+.sidebar__title, .sidebar__info {
+    padding-left: 1.3rem;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 1px;
+}
+
+.sidebar__title--Parking {
+    color: rgb(39, 53, 80);
+}

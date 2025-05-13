@@ -1,0 +1,33 @@
+.main-content {
+    flex: 1;
+    padding-left: 100px;
+    padding-top: 10px;
+    height: 100vh;             /* Toma toda la altura disponible */
+    overflow-y: auto;          /* Permite hacer scroll interno */
+    display: flex;
+    flex-direction: column;
+}
+
+.tabla-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.resumen-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.resumen-tabla th, .resumen-tabla td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-custom{
+    margin-top: 0px;
+    margin-bottom: 25px;
+    border-radius: 30px;
+    margin-right: 30px
+}

@@ -1,0 +1,61 @@
+/* .user-menu-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  background-color: #f4f4f9;
+} */
+
+.user-menu-container {
+  position: relative;
+  cursor: pointer;
+}
+
+/* avatar usuario */
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  padding: 15px 0;
+  z-index: 10;
+}
+
+.menu-options {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-option-item{
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-option-item:hover{
+  background: linear-gradient(to right, #7dd4fc45, #0285c75b);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 14px;
+  margin: 7px;
+}

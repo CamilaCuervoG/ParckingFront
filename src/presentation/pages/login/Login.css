@@ -1,0 +1,199 @@
+/*importamos tipografias*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/*Evitar estilos predeterminados*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Estilo general*/
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f4f3;
+    font-family: "Montserrat", sans-serif;
+}
+
+/*Contenedor principal*/
+.container{
+    width: 800px;
+    height: 500px;
+    display: flex;
+    position: relative;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.3);
+}
+
+/*Contenedor de cada formulario*/
+.container__form{
+    width: 100%;
+    overflow: hidden;
+}
+
+/*Estilo de lo formularios*/
+.container__form form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in;
+}
+
+/*Estilo títulos*/
+.container__form h2{
+    font-size: 30px;
+    font-family: "Nunito", sans-serif;
+    margin-bottom: 20px;
+}
+
+/*Contenedor de los campos de entrada*/
+.container__input{
+    width: 300px;
+    height: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #EEEEEE;
+}
+
+/*Estilo de los campos de entrada*/
+.container__input input{
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+}
+
+/*Enlace recuperar contraseña*/
+.container__form a{
+    color: black;
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+/*Botones*/
+.button{
+    width: 170px;
+    height: 45px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: #052955;
+    color: white;
+}
+
+/*ANIMACIONES*/
+/*ANIMACIONES*/
+.sign__up{
+    transform: translateX(-100%);
+}
+
+/*Al activar la clase toggle, el formulario inicio de sesión se mueve a la derecha*/
+.container.toggle .sign__in{
+    transform: translateX(100%);
+}
+
+/*Al activar la clase toggle, el formulario registro vuelve a su posición original*/
+.container.toggle .sign__up{
+    transform: translateX(0);
+}
+
+/*Welcome*/
+/*Contenedor de bienvenida*/
+.container__welcome{
+    background-color: #051e3e;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out, border-radius 0.5s ease-in-out; /*Transición de transformación y cambio de border-radius para suavizar animación*/
+    border-radius: 50% 0 50%;
+    overflow: hidden;
+}
+
+/*Animación al activaarse el contenedor*/
+.container.toggle .container__welcome{
+    transform: translateX(0); /*Vuelve a posición inicial*/
+    border-radius: 0 50% 0 50%;
+    background-color: #10386c;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    height: 100%; 
+    padding: 20px; 
+}
+
+/*Estilo del mensaje de bienvenida*/
+.container__welcome .welcome{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0 50px;
+    color: white;
+    transition: transform 0.5s ease-in-out;
+}
+
+/*Se pone fuera de la vista*/
+.welcome__in{
+    transform: translateX(110%);
+}
+
+/*Estilos de los h3*/
+.container__welcome h3{
+    font-size: 40px;
+    color: white;
+    font-family: "Nunito", sans-serif;
+    margin-bottom: 20px;
+}
+
+/*Estilos de los p*/
+.container__welcome p{
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/*Estilo botón sesión bienvenida*/
+.container__welcome .button{
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    
+}
+
+/*Efecto de transición al hacer click en los botones*/
+/*Mueve el mensaje a su posición inicial*/
+.container.toggle .welcome__in{
+    transform: translateX(0);
+}
+
+/*Mueve el mensaje fuera de la vista*/
+.container.toggle .welcome__up{
+    transform: translateX(-100%);
+}
+
+
+  

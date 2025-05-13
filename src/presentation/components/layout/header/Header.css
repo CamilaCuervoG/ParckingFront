@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .search {
+    flex: 1;
+    max-width: 600px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    background-color: white;
+    margin-right: 20px;
+  }
+  
+  .menu-usuario {
+    display: flex;
+    align-items: center;
+  }
+  

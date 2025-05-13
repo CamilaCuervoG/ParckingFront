@@ -1,0 +1,9 @@
+/* solo reset y variables */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
+
+:root {
+  --primary: #0d6efd;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Nunito', sans-serif; }

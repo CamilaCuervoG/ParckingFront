@@ -1,0 +1,36 @@
+/*income card*/
+.income-card {
+    /* max-width: 220px; */
+    width: 100%;
+    background: linear-gradient(135deg, #ffffff, #f7f9fb);
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.income-card:hover {
+    transform: translateY(-3px);
+}
+
+.income-card-header {
+    font-size: 15px;
+    font-weight: 600;
+    color: #075985;
+    margin-bottom: 40px;
+}
+
+.income-card-body {
+    font-size: 29px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.income-card-footer {
+    font-size: 14px;
+    color: #666;
+}

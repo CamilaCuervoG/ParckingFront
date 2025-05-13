@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {    
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #f4f4f4; */
+    overflow: hidden; /* Elimina el scroll del body */
+    height: 100vh;    /* Asegura que el body ocupe toda la altura */
+}
+
+/* Centrado horizontal del dashboard */
+.dashboard {
+    display: flex;
+    /* width: 100%; */
+    margin: 18px 10px 0 90px;
+    max-width: 1200px;
+    min-width: 320px;
+    /* margin: 0 auto; */
+}
+
+.main-content{
+    overflow-y: scroll; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    height: 100vh; 
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+    "header header"
+    "banner right-section"
+    "progress-cards right-section"
+    "datescards-container right-section"
+    "articles right-section";
+    flex: 1;
+    background-color: #E8EAEF;
+    padding: 10px 10px 30px 39px !important;
+    height: 100vh;             
+    overflow-y: auto;          
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    
+}
+
+.main-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ajustes de estructura */
+.content-grid {
+    display: flex;
+    padding-right: 30px;
+    /* padding-left: 10px; */
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.article-card, .price-card{
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.datescards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    gap: 20px;
+    padding: 20px 0 ;
+    border-radius: 20px;
+}
+
+.right-section{
+    margin-left: 15px;
+}
+
+.article-card{
+      background: #f7f9fc;
+    padding-bottom: 42px;
+}

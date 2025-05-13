@@ -1,0 +1,62 @@
+.price-card {
+    padding: 20px;
+    background-color: #f9fbff; /* Fondo más suave */
+    border-radius: 12px; /* Esquinas más redondeadas */
+    border: 1px solid #e0eaff92; /* Borde sutil tipo tarjeta */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* margin-bottom: 20px; */
+    /* margin-top: 20px; */
+    font-size: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Título */
+.price-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #075985;
+}
+
+/* Contenedor de columnas */
+.price-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* Columnas individuales */
+.left-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04); /* Sombra interna tipo tarjeta */
+}
+
+/* Subtítulos */
+.price-card h3 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: #6295b7;
+}
+
+/* Precios */
+.price-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #000000;
+    text-align: center;
+}

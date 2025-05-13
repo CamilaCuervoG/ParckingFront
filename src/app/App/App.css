@@ -1,0 +1,9 @@
+/* Tipografía para todo el texto general */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+  /* Tipografía para los títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+}
