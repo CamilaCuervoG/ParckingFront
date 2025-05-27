@@ -1,0 +1,166 @@
+/* Contenedor general para las cards */
+.exit-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Alineadas a la izquierda con espacio */
+}
+
+/* Card individual */
+.exit-card {
+  flex: 1 1 280px;
+  max-width: 350px;
+  background: #0285c782;
+  border-radius: 20px;
+  color: white;
+  padding: 20px 30px 20px 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: right;
+  user-select: none;
+
+  transition: box-shadow 0.3s ease;
+}
+
+.exit-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Título */
+.exit-card h3 {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* Número grande */
+.large-number {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  user-select: text;
+}
+
+/* Texto pequeño debajo */
+.total-text {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 6px;
+  font-weight: 500;
+  user-select: text;
+  letter-spacing: 0.02em;
+}
+
+/* Overlay (mini panel) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Panel tipo alerta */
+.alert-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 24px 32px;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.alert-panel h4 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.alert-panel form label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.alert-panel input,
+.alert-panel select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.alert-panel button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none;
+  flex: 1;
+}
+
+.alert-panel button:first-child {
+  background-color: #007bff;
+  color: white;
+  margin-right: 10px;
+  transition: background-color 0.25s ease;
+}
+
+.alert-panel button:first-child:hover {
+  background-color: #0056b3;
+}
+
+.btn-close {
+  background-color: #e0e0e0;
+  color: #333;
+  transition: background-color 0.25s ease;
+}
+
+.btn-close:hover {
+  background-color: #bdbdbd;
+}
+
+/* Responsive para móvil */
+@media (max-width: 480px) {
+  .exit-card {
+    flex-basis: 100%;
+    max-width: 100%;
+    padding: 16px 24px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .large-number {
+    font-size: 3rem;
+  }
+
+  .total-text {
+    font-size: 1rem;
+  }
+}
