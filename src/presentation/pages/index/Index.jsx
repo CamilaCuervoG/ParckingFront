@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/layout/sidebar/Sidebar';
 import Header from "../../components/layout/header/Header";
 import EntryCard from '../../components/ui/cards/EntryCard/EntryCard';
@@ -8,10 +9,25 @@ import IncomeCard from '../../components/ui/cards/IncomeCard/IncomeCard';
 import StatsCard from '../../components/ui/cards/StatsCard/StatsCards';
 import Banner from '../../components/layout/banner/Banner';
 import ParkingSystem from '../../components/ui/cards/ParkingSystem/ParkingSystem';
+import GestionarConfiguracion from '../../../domain/usecases/gestionarConfiguración';
 import './Index.css';
 import ExitCard from '../../components/ui/cards/ExitCard/ExitCard';
 
 function Index() {
+  const [parkingConfig, setParkingConfig] = useState({
+    totalEspacios: 20,
+    umbralAlta: 70,
+    filas: 4,
+    columnas: 5
+  });
+
+  useEffect(() => {
+    const config = GestionarConfiguracion.obtenerConfiguracionParking();
+    if (config) {
+      setParkingConfig(config);
+    }
+  }, []);
+
   return (
     <div className="dashboard">
       <Sidebar />
@@ -26,7 +42,7 @@ function Index() {
 
             {/* ParkingSystem */}
             <div className="parkingCard">
-              <ParkingSystem/>
+              <ParkingSystem config={parkingConfig} />
             </div>
 
             {/* Entry/Exit Cards */}
@@ -47,31 +63,18 @@ function Index() {
 
             {/* Income Cards */}
             <div className="datescards-container">
-              {/* Estadísticas de Entradas y Salidas */}
-              {/* <StatsCard className="entradaSalida"
-                title="Estadísticas de Entradas y Salidas" 
-                entries={200} 
-                exits={100} 
-                footer="Datos del día de hoy"
-              /> */}
-              
-              {/* Dinero diario */}
               <IncomeCard 
                 className="ingresosDia" 
                 title="Ingresos del Día" 
                 value="$500.000" 
                 footer="Total ingresos del día" 
               />        
-              
-              {/* Dinero semanal */}
               <IncomeCard 
                 className="ingresosSemana" 
                 title="Ingresos de la Semana" 
                 value="$2'000.000" 
                 footer="Total ingresos de la semana" 
               />        
-              
-              {/* Dinero mensual */}
               <IncomeCard 
                 className="ingresosMensual" 
                 title="Ingresos del Mes" 
@@ -105,9 +108,6 @@ function Index() {
 
           {/* Right Section */}
           <aside className="right-section">
-            {/* Calendar Widget - Uncomment when needed */}
-            {/* <CalendarWidget /> */}
-
             {/* Price Cards */}
             <div className="prices">
               <PriceCard 
