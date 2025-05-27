@@ -1,0 +1,292 @@
+/* Evita scroll en toda la página cuando modal esté abierto */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Overlay del modal con fondo difuso */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 1rem;
+  overflow: hidden;
+  animation: fadeInBg 0.3s ease;
+}
+
+/* Caja modal */
+.modal-box {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  width: 100%;
+  max-width: 540px;        /* ancho reducido para mejor responsividad */
+  max-height: 90vh;        /* no sobrepasar 90% de alto de pantalla */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeInModal 0.4s ease;
+  overflow: hidden;       /* ocultar overflow del modal */
+}
+
+/* Animaciones */
+@keyframes fadeInBg {
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.3); }
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Contenido principal del modal con scroll interno */
+.modal-content {
+  padding: 1rem 0;
+  flex-grow: 1;           /* ocupa espacio disponible */
+  overflow-y: auto;       /* scroll vertical interno si contenido es alto */
+  -webkit-overflow-scrolling: touch; /* smooth scroll en iOS */
+}
+
+/* Contenedor principal */
+.parking-wrapper {
+  padding-top: 1rem;
+  max-width: 100%;
+}
+
+/* Botón principal */
+.main-btn {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 18px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.main-btn:hover {
+  transform: scale(1.02);
+}
+
+/* Colores de fondo del botón */
+.bg-red {
+  background-color: #7e0e0e;
+}
+
+.bg-blue {
+  background-color: #294065;
+}
+
+/* Textos del botón */
+.btn-info .title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.btn-info .subtitle {
+  font-size: 1.5rem;
+  text-align: left;
+  color: #e8e8eb;
+}
+
+/* Encabezado del modal */
+.modal-header {
+  padding: 1rem;
+}
+
+.bg-red-light {
+  background: white;
+  border-radius: 20px;
+}
+
+.bg-blue-light {
+  background: white;
+  border-radius: 20px;
+}
+
+/* Parte superior del modal */
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botón de cierre */
+.close-btn {
+  font-size: 1.5rem;
+  border: none;
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+  color: #e11d48;
+}
+
+/* Sección de estadísticas */
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.stats div {
+  text-align: center;
+}
+
+.stats strong {
+  display: block;
+  font-size: 1.25rem;
+}
+
+.red {
+  color: #7e0e0e;
+}
+
+.green {
+  color: #16a34a;
+}
+
+/* Barra de progreso */
+.progress-bar {
+  background: #e5e7eb;
+  height: 8px;
+  border-radius: 9999px;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 0.3s;
+}
+
+/* Leyenda */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.box {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+}
+
+.box.red {
+  background: #7e0e0e;
+}
+
+.box.green {
+  background: #22c55e;
+}
+
+/* Grid de celdas (espacios de parking) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.cell {
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background: #f4f4f5;
+  text-align: center;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cell.occupied {
+  background: #fbdbdb;
+  border: 2px solid #fbdbdb;
+}
+
+.cell.free {
+  background: #bff8d3;
+  border: 2px solid #bff8d3;
+}
+
+/* Estados (badge inferior del modal) */
+.status {
+  text-align: center;
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.status-red {
+  background: #fee2e2;
+  color: #000000;
+  font-size: 18px;
+}
+
+.status-green {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+/* Responsive para dispositivos pequeños */
+@media (max-width: 600px) {
+  .modal-box {
+    max-width: 90vw;
+    padding: 1rem;
+  }
+
+  .btn-info .title {
+    font-size: 1.6rem;
+  }
+
+  .btn-info .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  }
+
+  .cell {
+    font-size: 1.1rem;
+    padding: 0.6rem;
+  }
+
+  .close-btn {
+    font-size: 1.4rem;
+  }
+}
