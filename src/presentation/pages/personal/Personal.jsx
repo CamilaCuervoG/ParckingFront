@@ -57,8 +57,10 @@ export default function Personal() {
   return (
     <div className="dashboard">
       <Sidebar />
-      <div className="main-content">
-        <Header />
+      <div className="main-content personal-content">
+        <div className="header personal-header">
+        <Header titulo="Manejo Personal" />
+        </div>
 
         <div className="banner">Gestión de Personal</div>
         <div className="content-grid">

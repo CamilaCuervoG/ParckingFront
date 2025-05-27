@@ -1,12 +1,11 @@
 import UserMenu from '../../ui/UserMenu/UserMenu';
 import "./Header.css";
 
-function Header() {
+function Header({ titulo = "Dashboard Principal" }) {
   return (
     <header className="header">
-      <input type="text" placeholder="Search something..." className="search" />
       <div className="menu-usuario">
-        <UserMenu />
+        <UserMenu titulo={titulo} />
       </div>
     </header>
   );

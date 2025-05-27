@@ -144,6 +144,38 @@ class gestionarConfiguracion {
       altaOcupacion
     };
   }
+
+  // Precios predeterminados
+static obtenerPrecios() {
+  try {
+    const precios = JSON.parse(localStorage.getItem("preciosParqueadero"));
+    return precios || {
+      fraccion: { auto: 3000, moto: 2000 },
+      hora: { auto: 7000, moto: 5000 },
+      dia: { auto: 35000, moto: 20000 },
+      mensualidad: { auto: 140000, moto: 100000 }
+    };
+  } catch (error) {
+    console.error("Error al obtener precios:", error);
+    return {
+      fraccion: { auto: 3000, moto: 2000 },
+      hora: { auto: 7000, moto: 5000 },
+      dia: { auto: 35000, moto: 20000 },
+      mensualidad: { auto: 140000, moto: 100000 }
+    };
+  }
+}
+
+static guardarPrecios(nuevosPrecios) {
+  try {
+    localStorage.setItem("preciosParqueadero", JSON.stringify(nuevosPrecios));
+    return true;
+  } catch (error) {
+    console.error("Error al guardar precios:", error);
+    return false;
+  }
+}
+
   
 }
 

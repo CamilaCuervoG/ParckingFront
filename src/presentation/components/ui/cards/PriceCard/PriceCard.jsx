@@ -7,7 +7,7 @@ function PriceCard({ autoPrice, motoPrice, title }) {
 
   return (
     <div className="price-card">
-      <h2 className="price-title">{title}</h2> {/* Título recibido desde Dashboard */}
+      <h2 className="price-title">{title}</h2>
       <div className="price-columns">
         <div className="left-column">
           <h3>Automóviles</h3>
