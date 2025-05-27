@@ -1,0 +1,118 @@
+/* src/pages/register/RegisterForm.css */
+
+.register-container {
+  min-height: 100vh;
+  padding: 40px;
+  padding-left: 80px;
+  margin-left: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f6fa;
+  box-sizing: border-box;
+}
+
+.register-form {
+  width: 400px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(5, 41, 85, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.register-form h1 {
+  margin-bottom: 8px;
+  color: #052955;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.register-form p {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #052955;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1.5px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.2s;
+  background-color: transparent;
+  color: #333;
+}
+
+input:focus {
+  outline: none;
+  border-color: #052955;
+}
+
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input input {
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  color: #666;
+}
+
+button {
+  margin-top: 6px;
+  background-color: #052955;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #10386c;
+}
+
+.register-links {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.register-links a {
+  color: #052955;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-links a:hover {
+  text-decoration: underline;
+}

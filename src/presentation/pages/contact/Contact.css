@@ -1,0 +1,11 @@
+.contact-main {
+  padding: 40px;
+  background-color: transparent;
+  min-height: 100vh;
+  color: #2c3e50;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items:center; /* 👈 Alinea el formulario a la izquierda */
+  gap: 20px;
+}
