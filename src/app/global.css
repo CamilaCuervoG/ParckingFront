@@ -5,5 +5,18 @@
   --primary: #0d6efd;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Nunito', sans-serif; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Tipografía para todo el texto general */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Tipografía para los títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito', sans-serif;
+}
