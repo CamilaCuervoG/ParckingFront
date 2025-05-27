@@ -1,0 +1,83 @@
+/* Fondo oscuro que cubre toda la pantalla */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0; /* importante: no restes 250px ni uses sidebar */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Contenedor del contenido del modal */
+.modal-content {
+  background-color: #ffffff;
+  color: #000;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 600px;
+  max-width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Contenedor de los botones */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+/* Botones */
+.modal-close-btn,
+.modal-comprar-btn {
+  flex: 1;
+  max-width: 150px;
+  padding: 0.6rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-close-btn {
+  background-color: #c0392b;
+}
+
+.modal-close-btn:hover {
+  background-color: #a93226;
+}
+
+.modal-comprar-btn {
+  background-color: #27ae60;
+}
+
+.modal-comprar-btn:hover {
+  background-color: #1e8449;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+th {
+  background-color: #f8f8f8;
+}

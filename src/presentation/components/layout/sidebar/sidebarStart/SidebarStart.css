@@ -1,0 +1,127 @@
+.sidebarstart {
+  margin-top: 0;
+  width: 80px;    /* ancho inicial */
+  height: 100vh;
+  background-color: aliceblue;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centrar verticalmente */
+  align-items: center;      /* centrar horizontalmente */
+  padding: 15px 10px;
+  box-sizing: border-box;
+  border-radius: 0 15px 15px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  z-index: 100;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebarstart:hover {
+  width: 220px;
+  align-items: flex-start; /* texto y botones alineados a la izquierda */
+  padding-left: 20px;
+}
+
+/* Contenedor logo + brand */
+.sidebarstart-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  justify-content: center; /* centro contenido cuando está colapsado */
+}
+
+.sidebarstart:hover .sidebarstart-title {
+  justify-content: flex-start; /* alineado a la izquierda al expandir */
+}
+
+/* Logo siempre visible, pequeño y crece al expandir */
+.sidebarstart-logo {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  transition: width 0.3s ease;
+}
+
+.sidebarstart:hover .sidebarstart-logo {
+  width: 70px;
+}
+
+/* Texto de la marca oculto al inicio */
+.brandstart {
+  font-size: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Texto de marca visible al expandir */
+.sidebarstart:hover .brandstart {
+  opacity: 1;
+}
+
+.sidebarstart-nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centro botones horizontalmente */
+}
+
+.sidebarstart:hover .sidebarstart-nav {
+  align-items: flex-start; /* alineación izquierda al expandir */
+}
+
+.sidebarstart-nav button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  padding: 8px;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 7px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: center; /* centro iconos cuando sidebar colapsada */
+}
+
+.sidebarstart:hover .sidebarstart-nav button {
+  justify-content: flex-start; /* texto y iconos alineados a la izquierda al expandir */
+}
+
+/* Texto oculto en botones, aparece al expandir */
+.sidebarstart-nav button .buttonstart-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, width 0.3s ease;
+}
+
+.sidebarstart:hover .sidebarstart-nav button .buttonstart-text {
+  opacity: 1;
+  width: auto;
+}
+
+.sidebarstart-nav button .icon {
+  font-size: 1.5rem;
+}
+
+.sidebarstart-nav button:hover {
+  background-color:darkgrey;
+}

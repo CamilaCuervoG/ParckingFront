@@ -1,0 +1,54 @@
+.payment-form-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-form-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.tarifas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.tarifas-table th,
+.tarifas-table td {
+  padding: 12px 16px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.tarifas-table th {
+  background-color: #f3f3f3;
+  font-weight: bold;
+}
+
+.tarifas-table td {
+  background-color: #ffffff;
+  font-size: 1rem;
+}
+
+.cerrar-btn {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
+
+.cerrar-btn:hover {
+  background-color: #a93226;
+}
