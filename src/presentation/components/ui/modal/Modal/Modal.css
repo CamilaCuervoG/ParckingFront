@@ -1,4 +1,5 @@
-/* Fondo oscuro que cubre toda la pantalla */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -16,20 +17,26 @@
 .modal-content {
   background-color: #ffffff;
   color: #000;
-  padding: 2rem;
+  padding: 1rem 1.5rem;  /* menos padding */
   border-radius: 10px;
-  width: 600px;
-  max-width: 90%;
-  max-height: 80vh;
+  width: auto;          
+  max-width: 60%;
+  max-height: 70vh;      /* menos alto para que sea más compacto */
   overflow-y: auto;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+}
+.modal-body p {
+  max-width: 100%;    /* que no exceda el ancho del contenedor */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-family: 'Montserrat';
 }
 
 /* Contenedor de los botones */
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
   margin-top: 1.5rem;
 }
@@ -38,7 +45,7 @@
 .modal-close-btn,
 .modal-comprar-btn {
   flex: 1;
-  max-width: 150px;
+  max-width: 100px;
   padding: 0.6rem 1rem;
   color: white;
   border: none;
@@ -65,10 +72,20 @@
 }
 
 /* Tabla */
+.modal-body {
+  max-height: 60vh; /* o ajusta según prefieras */
+  overflow-y: auto;
+  overflow-x: auto; /* scroll horizontal para tablas anchas */
+}
+
 table {
   width: 100%;
+  max-width: 550px;
   border-collapse: collapse;
   margin-top: 1rem;
+  table-layout: fixed;
+  margin-left: auto;    /* <-- agrega esto */
+  margin-right: auto;   /* <-- y esto */
 }
 
 th,
@@ -76,8 +93,25 @@ td {
   border: 1px solid #ccc;
   padding: 0.5rem;
   text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100px;
 }
 
 th {
   background-color: #f8f8f8;
+}
+
+@media (max-width: 480px) {
+  .payment-form {
+    padding: 1.5rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+  }
+
+  .buttons-container {
+    justify-content: center;
+  }
 }
