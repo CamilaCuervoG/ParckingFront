@@ -1,102 +1,85 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Nunito:wght@400;600;700;900&display=swap');
-
-/* =========================================================
-  Tipografías
-   ========================================================= */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-}
-
-body, p, span, li, a, button {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
+body {
   margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f6fa;
 }
 
-/* =========================================================
-  Bloque: Page (pantalla completa con fondo)
-   ========================================================= */
-.page {
-  width: 100vw !important;
-  height: 100vh;
-  position: relative;           /* referencia para ::after */
-  padding-top: 80px;            /* altura de la navbar */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.main-content {
+  margin-left: 200px; 
+  padding: 40px;
+  min-height: 90vh;
+  background-color: white;
+}
+
+.main-content h1 {
+  font-size: 30px;
+  color: #2c3e50;
+  margin-bottom: 10px;
   text-align: center;
-
-  background: url('/assets/fondo.jpeg') center / cover no-repeat;
 }
 
-/* =========================================================
-   Bloque: Menu
-   ========================================================= */
-.menu {
-  position: relative !important;
-  z-index: 120 !important;      /* por encima del overlay */
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-
-  width: 100vw !important;
-  max-width: 460px !important;
-  padding: 50px 60px 50px !important;
-  background: #051e3e !important;
-  color: #fff;
-  border-radius: 25px;
-  box-shadow: 0 0 20px rgba(2, 2, 2, 0.3);
+.main-content h6 {
+  font-size: 17px;
+  color: #2c3e50;
+  padding: 20px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-/* Asegura que los hijos del menú no queden absolute */
-.menu > *,
-.menu__buttons > * {
-  position: static !important;
+.main-content p {
+  font-size: 16px;
+  color: #34495e;
+  text-align: justify;
 }
 
-/* Logo */
-.menu__logo {
-  width: 80px;
-  max-width: 100%;
-  transition: transform 0.3s ease-in-out;
-  margin-bottom: 8px;
+.cards-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.menu__logo:hover { transform: scale(1.20); }
-
-/* Título y subtítulo */
-.menu__title  { font-size: 24px; margin-top: 5px; color:white; }
-.menu__subtitle { color: #b2d2f4; }
-
-/* Botones */
-.menu__button {
-  width: 100%;
-  padding: 16px;
-  margin: 6px 0;
-  border: none;
+.card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 18px;
-  border-radius: 15px;
-  font-weight: 600;
-  transition: all 0.3s ease-in-out;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  align-items: center;
 }
 
-.menu__button:hover   { transform: scale(1.20); filter: brightness(1.1); }
-.menu__button:active  { transform: scale(0.95); }
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
 
-/* Modificadores de color */
-.menu__button--blue  { background: #1c75d5; color: #fff; }
-.menu__button--light { background: #b6d9f8; color: #000; }
-.menu__button--sky   { background: #75c3f8; color: #000; }
-.menu__button--gray  { background: #627b99; color: #fff; }
+.modal-comprar-btn:hover {
+  background-color: #16a085;
+}
 
-/* =========================================================
-   Responsive
-   ========================================================= */
-@media (max-width: 480px) {
-  .menu { width: 90%; padding: 30px; }
-  .menu__title { font-size: 20px; }
-  .menu__button { font-size: 14px; }
+.info-section {
+  padding: 40px;
+  margin-top: 40px;
+  color: #2c3e50;
+  max-width: 720px;
+}
+
+.info-section h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 600;
+  
+}
+
+.info-section p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: #34495e;
+  text-align: justify;
 }

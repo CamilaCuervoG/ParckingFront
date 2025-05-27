@@ -8,6 +8,9 @@ import Salidas       from '../../presentation/pages/salidas/Salidas';
 import Historial     from '../../presentation/pages/historial/Historial';
 import Personal      from '../../presentation/pages/personal/Personal';
 import Configuracion from '../../presentation/pages/configuración/Configuracion';
+import About         from '../../presentation/pages/about/About';
+import Contact       from '../../presentation/pages/contact/Contact';
+import Register      from '../../presentation/pages/register/Register'
 
 import PrivateRoute  from '../../presentation/components/PrivateRoute';
 import './App.css';
@@ -18,6 +21,9 @@ export default function App() {
       {/* públicas */}
       <Route path="/"      element={<Start />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/register" element={<Register />} />
 
       {/* protegidas */}
       <Route element={<PrivateRoute />}>
