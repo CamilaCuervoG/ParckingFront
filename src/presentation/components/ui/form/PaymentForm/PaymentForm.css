@@ -1,54 +1,117 @@
-.payment-form-container {
-  max-width: 700px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.payment-form {
+  max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.payment-form-container h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-}
-
-.tarifas-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1.5rem;
-}
-
-.tarifas-table th,
-.tarifas-table td {
-  padding: 12px 16px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
-
-.tarifas-table th {
-  background-color: #f3f3f3;
-  font-weight: bold;
-}
-
-.tarifas-table td {
   background-color: #ffffff;
-  font-size: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Montserrarat';  
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
-.cerrar-btn {
-  background-color: #c0392b;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
+.payment-form label,
+.payment-form legend {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: block;
+  color: #2c3e50;
+}
+
+.payment-form input,
+.payment-form select {
+  font-family: 'Montserrat';
+  width: 100%;
+  padding: 0.6rem 0.8rem;
   font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline-color: #2980b9;
+  background-color: #fdfdfd;
+}
+
+.payment-type {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.payment-type legend {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 1rem;
+  color: #34495e;
+}
+
+.payment-type label {
+  font-family: 'Montserrat';
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+}
+
+/* Valor a pagar */
+.payment-form p {
+  font-family: 'Montserrat';
+  margin: 0;
+  font-size: 1.1rem;
+  color: #27ae60;
+}
+
+
+/* Button section */
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-submit {
+  background-color: #2980b9;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+
   border-radius: 8px;
   cursor: pointer;
-  display: block;
-  margin-left: auto;
+  min-width: 120px;
+  transition: background-color 0.3s ease;
 }
 
-.cerrar-btn:hover {
-  background-color: #a93226;
+.btn-submit:hover {
+  background-color: #2471a3;
+}
+
+@media (max-width: 480px) {
+  .payment-form {
+    padding: 1.5rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+  }
+
+  .buttons-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-form {
+    padding: 1.5rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+  }
+
+  .buttons-container {
+    justify-content: center;
+  }
 }

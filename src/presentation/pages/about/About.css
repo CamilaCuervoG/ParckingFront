@@ -31,3 +31,17 @@
   color: #10386c;
   margin-bottom: 10px;
 }
+
+@media (max-width: 480px) {
+  .payment-form {
+    padding: 1.5rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+  }
+
+  .buttons-container {
+    justify-content: center;
+  }
+}
