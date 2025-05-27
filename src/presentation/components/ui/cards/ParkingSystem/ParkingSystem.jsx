@@ -1,22 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { FaCarSide, FaParking } from "react-icons/fa"; // Importamos iconos
+import { FaCarSide, FaParking } from "react-icons/fa";
+import GestionarConfiguracion from "../../../../../domain/usecases/gestionarConfiguración";
 import "./ParkingSystem.css";
 
-const parkingData = {
-  cells: Array.from({ length: 20 }, (_, i) => ({
-    id: `${String.fromCharCode(65 + Math.floor(i / 5))}${(i % 5) + 1}`,
-    occupied: Math.random() > 0.4,
-  })),
-};
-
-export default function ParkingSystem() {
+export default function ParkingSystem({ config = null }) {
   const [showModal, setShowModal] = useState(false);
+  const [parkingData, setParkingData] = useState({ cells: [], config: {} });
+  const [estadisticas, setEstadisticas] = useState({
+    total: 0,
+    ocupados: 0,
+    disponibles: 0,
+    porcentaje: 0,
+    altaOcupacion: false
+  });
 
-  const total = parkingData.cells.length;
-  const occupied = parkingData.cells.filter((c) => c.occupied).length;
-  const available = total - occupied;
-  const percentage = Math.round((occupied / total) * 100);
-  const isHighOccupancy = percentage > 70;
+  // Cargar datos del parking
+  useEffect(() => {
+    const cargarDatos = () => {
+      let data;
+      let stats;
+
+      if (config) {
+        // Vista previa
+        data = GestionarConfiguracion.generarDatosParking(config);
+        // Si tienes un método específico para calcular estadísticas desde data, úsalo:
+        stats = GestionarConfiguracion.obtenerEstadisticasDesdeData
+          ? GestionarConfiguracion.obtenerEstadisticasDesdeData(data)
+          : GestionarConfiguracion.obtenerEstadisticasParking(); // fallback
+      } else {
+        // Modo real
+        data = GestionarConfiguracion.obtenerDatosParking();
+        stats = GestionarConfiguracion.obtenerEstadisticasParking();
+      }
+
+      setParkingData(data);
+      setEstadisticas(stats);
+    };
+
+    cargarDatos();
+  }, [config]);
 
   // Bloquear scroll del fondo cuando modal esté abierto
   useEffect(() => {
@@ -25,23 +47,44 @@ export default function ParkingSystem() {
     } else {
       document.body.classList.remove("no-scroll");
     }
-    // Limpieza al desmontar
     return () => document.body.classList.remove("no-scroll");
   }, [showModal]);
+
+  // Alternar ocupación (solo si no es vista previa)
+  const toggleEspacio = (espacioId) => {
+    if (config) return;
+
+    const espacio = parkingData.cells.find(cell => cell.id === espacioId);
+    if (espacio) {
+      const nuevoEstado = !espacio.occupied;
+
+      if (GestionarConfiguracion.actualizarEspacioParking(espacioId, nuevoEstado)) {
+        const data = GestionarConfiguracion.obtenerDatosParking();
+        const stats = GestionarConfiguracion.obtenerEstadisticasParking();
+        setParkingData(data);
+        setEstadisticas(stats);
+      }
+    }
+  };
+
+  const { total, ocupados, disponibles, porcentaje, altaOcupacion } = estadisticas;
+  const columnas = parkingData.config?.columnas || 5;
 
   return (
     <div className="parking-wrapper">
       <button
         onClick={() => setShowModal(true)}
-        className={`main-btn ${isHighOccupancy ? "bg-red" : "bg-blue"}`}
+        className={`main-btn ${altaOcupacion ? "bg-red" : "bg-blue"}`}
         aria-haspopup="dialog"
         aria-expanded={showModal}
         aria-controls="parking-modal"
       >
         <div className="btn-info">
-          <div className="title">Informe Global</div>
+          <div className="title">
+            {config ? "Vista Previa" : "Informe Global"}
+          </div>
           <div className="subtitle">
-            {occupied}/{total} ocupados ({percentage}%)
+            {ocupados}/{total} ocupados ({porcentaje}%)
           </div>
         </div>
       </button>
@@ -56,12 +99,12 @@ export default function ParkingSystem() {
         >
           <div className="modal-box">
             <div
-              className={`modal-header ${
-                isHighOccupancy ? "bg-red-light" : "bg-blue-light"
-              }`}
+              className={`modal-header ${altaOcupacion ? "bg-red-light" : "bg-blue-light"}`}
             >
               <div className="modal-top">
-                <h2 id="modal-title">Estado de Parqueaderos</h2>
+                <h2 id="modal-title">
+                  {config ? "Vista Previa - " : ""}Estado de Parqueaderos
+                </h2>
                 <button
                   className="close-btn"
                   onClick={() => setShowModal(false)}
@@ -76,39 +119,49 @@ export default function ParkingSystem() {
                   <span>Total</span>
                 </div>
                 <div>
-                  <strong className="red">{occupied}</strong>
+                  <strong className="red">{ocupados}</strong>
                   <span>Ocupados</span>
                 </div>
                 <div>
-                  <strong className="green">{available}</strong>
+                  <strong className="green">{disponibles}</strong>
                   <span>Disponibles</span>
                 </div>
               </div>
               <div className="progress-bar">
                 <div
-                  className={`progress-fill ${
-                    isHighOccupancy ? "bg-red" : "bg-blue"
-                  }`}
-                  style={{ width: `${percentage}%` }}
+                  className={`progress-fill ${altaOcupacion ? "bg-red" : "bg-blue"}`}
+                  style={{ width: `${porcentaje}%` }}
                 ></div>
               </div>
             </div>
 
             <div className="modal-content">
               <div className="legend">
-                <span>
-                  <span className="box red"></span>Ocupado
-                </span>
-                <span>
-                  <span className="box green"></span>Libre
-                </span>
+                <span><span className="box red"></span>Ocupado</span>
+                <span><span className="box green"></span>Libre</span>
+                {!config && (
+                  <span style={{ fontSize: '12px', color: '#666' }}>
+                    (Haz clic en un espacio para cambiar su estado)
+                  </span>
+                )}
               </div>
 
-              <div className="grid">
+              <div
+                className="grid"
+                style={{
+                  gridTemplateColumns: `repeat(${columnas}, 1fr)`
+                }}
+              >
                 {parkingData.cells.map((cell) => (
                   <div
                     key={cell.id}
-                    className={`cell ${cell.occupied ? "occupied" : "free"}`}
+                    className={`cell ${cell.occupied ? "occupied" : "free"} ${!config ? "clickable" : ""}`}
+                    onClick={() => toggleEspacio(cell.id)}
+                    style={{
+                      cursor: config ? "default" : "pointer"
+                    }}
+                    role={!config ? "button" : undefined}
+                    tabIndex={!config ? 0 : undefined}
                   >
                     <span>
                       {cell.occupied ? (
@@ -122,15 +175,25 @@ export default function ParkingSystem() {
                 ))}
               </div>
 
-              <div
-                className={`status ${
-                  isHighOccupancy ? "status-red" : "status-green"
-                }`}
-              >
-                {isHighOccupancy
+              <div className={`status ${altaOcupacion ? "status-red" : "status-green"}`}>
+                {altaOcupacion
                   ? "⚠️ Pocos espacios disponibles"
                   : "✅ Buena disponibilidad"}
               </div>
+
+              {config && (
+                <div style={{
+                  marginTop: '15px',
+                  padding: '10px',
+                  backgroundColor: '#f8f9fa',
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  color: '#666'
+                }}>
+                  Configuración: {parkingData.config?.filas || 4} filas × {columnas} columnas
+                  | Umbral de alerta: {parkingData.config?.umbralAlta || 70}%
+                </div>
+              )}
             </div>
           </div>
         </div>
