@@ -20,7 +20,7 @@ function EntryCard({ title, current, total, color }) {
       <div className={`entry-card ${color}`} onClick={handleTogglePanel}>
         <h3>{title}</h3>
         <p className="large-number">{current}</p>
-        <p className="total-text">{`Celdas Disponibles`}</p>
+        <p className="total-text">{`Celdas Disponibles prueba`}</p>
       </div>
 
       {showPanel && (
