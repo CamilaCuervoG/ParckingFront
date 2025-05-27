@@ -8,20 +8,6 @@
     flex-direction: column;
   }
   
-  /*Banner*/
-  
-  .banner {
-    background: #CBD5E1;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 2px; /* Espacio debajo del banner */
-    margin-right: 35px;
-    margin-left: 13px;
-  }
-  
   /* Estilos para el formulario */
   .card-custom {
     background-color: white;
@@ -93,6 +79,7 @@
   
   /*Tabla dinamica*/
   .resumen-container {
+    margin-top: 22px;
     width: 100%;
     padding: 20px;
     background-color: white;
@@ -147,7 +134,7 @@
   
   /* Mantener altura de la tabla incluso sin datos */
   .resumen-tabla tbody {
-    min-height: 395px;
+    min-height: 388px;
     display: block;
   }
   

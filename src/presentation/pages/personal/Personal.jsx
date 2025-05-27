@@ -1,34 +1,56 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import Sidebar from '../../components/layout/sidebar/Sidebar';
-import Header from '../../components/layout/header/Header';
-import GestionarPersonal from '../../../domain/usecases/gestionarPersonal';
-import '../../pages/index/Index.css';
-import '../../pages/personal/Personal.css';
-import Banner from "../../components/layout/banner/Banner";
+import Header  from '../../components/layout/header/Header';
 
-function Personal() {
-  const [nombre, setNombre] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [mensaje, setMensaje] = useState("");
-  const [personal, setPersonal] = useState([]);
+import { list, createEntry } from '../../../services/personalService';
+import './Personal.css';
 
-  // Cargar personal guardado al montar el componente
+export default function Personal() {
+  /* ---------- state ---------- */
+  const [name,       setName]       = useState('');
+  const [position,   setPosition]   = useState('');
+  const [message,    setMessage]    = useState('');
+  const [staff,      setStaff]      = useState([]);
+  const [loading,    setLoading]    = useState(false);
+
+  /* ---------- cargar datos al montar ---------- */
   useEffect(() => {
-    const guardado = GestionarPersonal.obtenerPersonal();
-    setPersonal(guardado.reverse());
+    (async () => {
+      try {
+        const { data } = await list();
+        setStaff(data);
+      } catch (err) {
+        console.error('Error al cargar personal:', err);
+        setMessage('⚠️ No se pudo cargar el personal');
+      }
+    })();
   }, []);
 
-  const handleSubmit = (e) => {
+  /* ---------- enviar nuevo registro ---------- */
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      const actualizado = GestionarPersonal.agregarPersonal(nombre, cargo);
-      setPersonal(actualizado);
-      setMensaje("✅ Personal registrado correctamente.");
-      setNombre("");
-      setCargo("");
-    } catch (error) {
-      setMensaje(error.message);
+      const payload = {
+        name,
+        position,
+        dateRegister: new Date().toISOString()   // ← se envía la fecha actual
+      };
+      await createEntry(payload);
+
+      /* refrescar tabla */
+      const { data } = await list();
+      setStaff(data);
+
+      setMessage('✅ Personal registrado correctamente.');
+      setName('');
+      setPosition('');
+    } catch (err) {
+      console.error(err);
+      setMessage('❌ Error al registrar personal');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,60 +59,51 @@ function Personal() {
       <Sidebar />
       <div className="main-content">
         <Header />
-        
-        {/* Banner */}
-        <Banner message="Gestión de Personal"/>
 
+        <div className="banner">Gestión de Personal</div>
         <div className="content-grid">
+          {/* ------------ FORMULARIO ------------ */}
           <section className="left-section">
             <div className="card-custom">
               <h3>Registrar Personal</h3>
+
               <form onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="nombre">Nombre:</label>
-                  <input
-                    id="nombre"
-                    type="text"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    placeholder="Nombre completo"
-                    required
-                  />
-                </div>
+                <label htmlFor="name">Nombre:</label>
+                <input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Nombre completo"
+                  required
+                />
 
-                <div>
-                  <label htmlFor="cargo">Cargo:</label>
-                  <input
-                    id="cargo"
-                    type="text"
-                    value={cargo}
-                    onChange={(e) => setCargo(e.target.value)}
-                    placeholder="Ej: Vigilante, Cajero..."
-                    required
-                  />
-                </div>
+                <label htmlFor="position">Cargo:</label>
+                <input
+                  id="position"
+                  value={position}
+                  onChange={(e) => setPosition(e.target.value)}
+                  placeholder="Ej: Vigilante, Cajero…"
+                  required
+                />
 
-                <button type="submit" className="btn-submit">
-                  Registrar
+                <button type="submit" disabled={loading}>
+                  {loading ? 'Guardando…' : 'Registrar'}
                 </button>
               </form>
 
-              {mensaje && (
-                <p
-                  style={{
-                    marginTop: "10px",
-                    color: mensaje.includes("correctamente") ? "green" : "red",
-                  }}
-                >
-                  {mensaje}
+              {message && (
+                <p style={{ color: message.startsWith('✅') ? 'green' : 'red' }}>
+                  {message}
                 </p>
               )}
             </div>
           </section>
 
+          {/* ------------ TABLA ------------ */}
           <aside className="right-section">
-            <div className="card-custom scrollable-table">
+            <div className="resumen-container">
               <h3>Historial de Personal</h3>
+
               <table className="resumen-tabla">
                 <thead>
                   <tr>
@@ -100,18 +113,26 @@ function Personal() {
                   </tr>
                 </thead>
                 <tbody>
-                  {personal.length === 0 ? (
+                  {staff.length === 0 ? (
                     <tr>
-                      <td colSpan="3" style={{ textAlign: "center" }}>
+                      <td colSpan="3" style={{ textAlign: 'center' }}>
                         Sin registros
                       </td>
                     </tr>
                   ) : (
-                    personal.map((p, index) => (
-                      <tr key={index}>
-                        <td>{p.nombre}</td>
-                        <td>{p.cargo}</td>
-                        <td>{p.fecha}</td>
+                    staff.map((p) => (
+                      <tr key={p.id}>
+                        <td>{p.name}</td>
+                        <td>{p.position}</td>
+                        <td>
+                          {new Date(p.dateRegister).toLocaleString('es-CO', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </td>
                       </tr>
                     ))
                   )}
@@ -124,5 +145,3 @@ function Personal() {
     </div>
   );
 }
-
-export default Personal;

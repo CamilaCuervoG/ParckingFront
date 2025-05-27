@@ -1,6 +1,6 @@
 import React from "react";
 
-function TablaEntradas({ entradas }) {
+export default function TablaEntradas({ entradas = [] }) {
   return (
     <div className="resumen-container" style={{ marginTop: "21px" }}>
       <h3>Entradas Registradas</h3>
@@ -13,20 +13,27 @@ function TablaEntradas({ entradas }) {
           </tr>
         </thead>
         <tbody>
-        {entradas.length === 0 ? (
+          {entradas.map((r, idx) => {
+            const fecha   = new Date(r.entryTime).toLocaleDateString();
+            const hora    = new Date(r.entryTime).toLocaleTimeString();
+          /* convierte valor BD → etiqueta UI */
+            const tipoMostrar = r.vehicleType === 'moto' ? 'Motocicleta' : 'Automóvil';
+
+            return (
+              <tr key={r.id}>
+                <td>{r.plate}</td>
+                <td>{tipoMostrar}</td>
+                <td>{fecha} - {hora}</td>
+              </tr>
+            );
+        })}
+
+        {!entradas.length && (
           <tr>
-            <td colSpan="3" style={{ textAlign: "center", fontStyle: "italic" }}>
+            <td colSpan="3" style={{ textAlign: "center", padding:12, fontStyle: "italic" }}>
               Sin datos registrados
             </td>
-          </tr>
-        ) : (
-          entradas.slice().reverse().map((entrada, index) => (
-            <tr key={index}>
-              <td>{entrada.placa}</td>
-              <td>{entrada.tipo}</td>
-              <td>{entrada.fecha}</td>
-            </tr>
-          ))
+          </tr> 
         )}
         </tbody>
       </table>
@@ -34,4 +41,4 @@ function TablaEntradas({ entradas }) {
   );
 }
 
-export default TablaEntradas;
+
