@@ -9,6 +9,7 @@
     transition: transform 0.2s ease;
 }
 
+
 .income-card:hover {
     transform: translateY(-3px);
 }

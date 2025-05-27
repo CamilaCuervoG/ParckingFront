@@ -12,13 +12,12 @@ export default function Historial() {
   const [entradas, setEntradas] = useState([]);
   const [salidas,  setSalidas]  = useState([]);
 
-  /* ───────── cargar datos reales ───────── */
   useEffect(() => {
     (async () => {
       try {
         const [{ data: inData }, { data: outData }] = await Promise.all([
-          listEntries(),  // sin exitTime
-          listExits()     // con exitTime, duración y valor
+          listEntries(),
+          listExits()
         ]);
         setEntradas(inData);
         setSalidas(outData);
@@ -32,20 +31,17 @@ export default function Historial() {
     <div className="dashboard">
       <Sidebar />
 
-      <div className="main-content">
-        <Header />
-
-        {/* -------- TABLA ENTRADAS -------- */}
-        <div className="tabla-scroll-history">
-          <TablaEntradas entradas={[...entradas].reverse()} />
+      <div className="main-content historial-content">
+        <div className="header historial-header">
+        <Header titulo="Historial Entradas y Salidas"/>
         </div>
 
-        {/* -------- TABLA SALIDAS --------  
-            (Trae su propio div .tabla-scroll desde el componente)   */}
-        <div className="tabla-scroll-history">
+        <div className="historial-tablas">
+          <TablaEntradas entradas={[...entradas].reverse()} />
           <TablaSalidas salidas={[...salidas].reverse()} />
         </div>
       </div>
     </div>
   );
 }
+

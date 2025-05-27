@@ -1,5 +1,5 @@
 /* ───────── Layout general ───────── */
-.main-content {
+/* .main-content {
   flex: 1;
   padding-left: 100px;
   padding-top: 10px;
@@ -7,7 +7,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* ───────── Banner ───────── */
 .banner {

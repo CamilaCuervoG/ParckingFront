@@ -1,62 +1,78 @@
+/* === PRICES CONTAINER === */
+.prices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+
+  /* 🔽 Alineación con el resto del contenido */
+  padding: 0 30px; /* Puedes ajustar el 30px según el resto de tu diseño */
+  box-sizing: border-box;
+}
+
+/* === PRICE CARD === */
 .price-card {
-    padding: 20px;
-    background-color: #f9fbff; /* Fondo más suave */
-    border-radius: 12px; /* Esquinas más redondeadas */
-    border: 1px solid #e0eaff92; /* Borde sutil tipo tarjeta */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    /* margin-bottom: 20px; */
-    /* margin-top: 20px; */
-    font-size: 10px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 20px;
+  background-color: #f9fbff; /* Fondo más suave */
+  border-radius: 12px; /* Esquinas más redondeadas */
+  border: 1px solid #e0eaff92; /* Borde sutil tipo tarjeta */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Efecto al pasar el mouse */
 .price-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
-/* Título */
+/* === TÍTULO === */
 .price-title {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #075985;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #075985;
 }
 
-/* Contenedor de columnas */
+/* === COLUMNAS INTERIORES === */
 .price-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
 }
 
-/* Columnas individuales */
+/* === CADA COLUMNA (Automóviles / Motocicletas) === */
 .left-column,
 .right-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04); /* Sombra interna tipo tarjeta */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
-/* Subtítulos */
+/* === SUBTÍTULOS (Automóviles / Motocicletas) === */
 .price-card h3 {
-    margin: 0;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    color: #6295b7;
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: #6295b7;
 }
 
-/* Precios */
+/* === VALORES DE PRECIO === */
 .price-card p {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #000000;
-    text-align: center;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #000000;
+  text-align: center;
 }

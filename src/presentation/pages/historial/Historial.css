@@ -1,77 +1,119 @@
-/* ------------------------------------------------------------------
-   Historial.css — estilos exclusivos de la vista Historial
-   ------------------------------------------------------------------ */
+/* Contenedor principal de las dos tablas */
+.historial-tablas {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 32px;
+  padding: 24px 40px;
+  box-sizing: border-box;
+  height: 100%;
 
-/* 1. CONTENEDOR PRINCIPAL ----------------------------------------- */
-.main-content {
-  flex: 1;
-  padding-left: 100px;
-  padding-top: 10px;
-  height: 100vh;          /* ocupa toda la altura del dashboard      */
-  overflow: auto;       /* scroll vertical global                  */
+  /* 🔧 Asegura que ocupe todo el ancho disponible */
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto; /* Opcional, por si hay margen lateral automático */
+}
+
+/* Cada bloque de tabla */
+.historial-tablas > * {
+  flex: 1 1 0;
+  min-width: 380px;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* 2. CONTENEDOR CON SCROLL POR TABLA ------------------------------ */
-.tabla-scroll,
-.tabla-scroll-history {   /* alias legacy — por si quedó en el código */
-  max-height: 380px;      /* visible antes de que aparezca el scroll  */
-  overflow: auto ;         /* vertical + horizontal cuando sea necesario */
-  margin-bottom: 32px;    /* separación entre tablas                  */
-  border: 1px solid #ddd;
-  border-radius: 8px;
+/* Títulos */
+.historial-tablas h3 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: #2c3e50;
 }
 
-/* 3. TABLAS ------------------------------------------------------- */
-.resumen-tabla,
-.resumen-tabla-history {  /* alias legacy                             */
+/* Scroll interno */
+.tabla-scroll {
+  flex: 1; /* Ocupa todo el espacio restante del contenedor */
+  overflow-x: auto;
+
+    /* ✅ Oculta la barra horizontal sin quitar el scroll */
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE 10+ */
+
+  /* Webkit (Chrome, Edge, Safari) */
+}
+.tabla-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilo de tabla */
+.historial-tablas table {
   width: 100%;
-  min-width: 720px;       /* fuerza barra horizontal si excede ancho  */
   border-collapse: collapse;
-  font-size: 1rem;
   table-layout: auto;
+  font-size: 0.95rem;
 }
 
 /* Celdas */
-.resumen-tabla th,
-.resumen-tabla td,
-.resumen-tabla-history th,
-.resumen-tabla-history td {
-  border: 1px solid #ddd;
-  padding: 12px 14px;
+.historial-tablas th,
+.historial-tablas td {
+  padding: 12px 16px;
   text-align: center;
-  word-wrap: break-word;
+  border: 1px solid #e1e1e1;
+  white-space: nowrap;
 }
 
-/* Encabezados */
-.resumen-tabla thead th,
-.resumen-tabla-history thead th {
-  white-space: nowrap;    /* evita saltos de línea en títulos         */
+/* Encabezado sticky */
+.historial-tablas thead th {
   position: sticky;
   top: 0;
+  background: #fdfdfd;
   z-index: 2;
-  background: #f5f5f5;
-}
-
-/* Zebra-striping opcional */
-.resumen-tabla tbody tr:nth-child(even),
-.resumen-tabla-history tbody tr:nth-child(even) {
-  background: #fafafa;
-}
-
-/* 4. CONTENEDOR INTERNO QUE PONEN LOS COMPONENTES ----------------- */
-.resumen-container {
-  width: 100%;
-  display: block;
-}
-
-.resumen-container h3 {
-  margin: 12px 0;
-  font-family: "Nunito", sans-serif;
   font-weight: 600;
 }
 
-/* ------------------------------------------------------------------
-   Fin de Historial.css
-   ------------------------------------------------------------------ */
+/* Rayado zebra */
+.historial-tablas tbody tr:nth-child(even) {
+  background-color: #f7f9fa;
+}
+
+/* Estilos visuales por tipo */
+.tabla-entradas {
+  border-top: 5px solid #3498db;
+}
+
+.tabla-salidas {
+  border-top: 5px solid #27ae60;
+}
+
+/* Botón "Registrar salida" */
+.tabla-salidas button {
+  padding: 6px 10px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.2s;
+}
+
+.tabla-salidas button:hover {
+  background-color: #219150;
+}
+
+
+/* Estilo específico para historial */
+.historial-content {
+  padding: 24px; /* ejemplo: sin margen izquierdo extra */
+  max-width: 100%;
+}
+
+.historial-header{
+  padding-left: 42px;
+}

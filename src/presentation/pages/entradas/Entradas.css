@@ -1,12 +1,12 @@
-.main-content {
+/* .main-content {
   flex: 1;
   padding-left: 100px;
   padding-top: 10px;
-  height: 100vh;             /* Toma toda la altura disponible */
-  overflow-y: auto;          /* Permite hacer scroll interno */
+  height: 100vh;            
+  overflow-y: auto;          
   display: flex;
   flex-direction: column;
-}
+} */
 
 /*Banner*/
 

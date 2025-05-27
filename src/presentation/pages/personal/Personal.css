@@ -1,12 +1,7 @@
-.main-content {
-    flex: 1;
-    padding-left: 100px;
-    padding-top: 10px;
-    height: 100vh;             /* Toma toda la altura disponible */
-    overflow-y: auto;          /* Permite hacer scroll interno */
-    display: flex;
-    flex-direction: column;
-  }
+.personal-content {
+    padding: 20px 107px 90px 90px;
+    height: 100vh;
+}
   
   /*Banner*/
   

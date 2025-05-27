@@ -5,8 +5,8 @@
   box-sizing: border-box;
 }
 
+
 body {
-  font-family: 'Poppins', sans-serif;
   background-color: white;
   height: 100vh;
   overflow: hidden;
@@ -39,7 +39,7 @@ body {
   gap: 1rem;
   margin-top: 10px;
   margin-right: 20px;
-  padding: 20px 30px 90px 50px !important;  /* Padding bottom para móviles */
+  padding: 20px 30px 90px 50px;  /* Padding bottom para móviles */
   overflow-y: auto;
   background-color: #E8EAEF;
   border-top-left-radius: 20px;
@@ -93,33 +93,34 @@ body {
 
 /* === DATES CARDS CONTAINER === */
 .datescards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  justify-content: center; /* Centra horizontalmente las tarjetas */
+  align-items: stretch;    /* Alinea verticalmente al mismo alto */
   gap: 20px;
-}
-
-/* === ARTICLES === */
-.articles {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  flex-wrap: nowrap;       /* No permite que bajen a otra fila */
+  margin-bottom: 30px;
 }
 
 /* === PRICES === */
 .prices {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
+  width: 100%;
 }
 
 /* === COMPONENTES BÁSICOS === */
-.articles-card,
 .price-card {
   background: white;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 
 /* ===========================
    MEDIA QUERIES RESPONSIVE
@@ -157,11 +158,6 @@ body {
   }
 
   .datescards-container {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .articles {
     grid-template-columns: 1fr;
     gap: 15px;
   }
@@ -207,10 +203,6 @@ body {
     gap: 15px;
   }
 
-  .articles {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
 }
 
 /* === TABLETS (768px - 991px) === */
@@ -257,12 +249,9 @@ body {
   .datescards-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+  
   }
 
-  .articles {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-  }
 }
 
 /* === PORTÁTILES PEQUEÑOS (992px - 1199px) === */
@@ -298,10 +287,6 @@ body {
     gap: 20px;
   }
 
-  .articles {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-  }
 }
 
 /* === PORTÁTILES GRANDES (1200px - 1399px) === */
@@ -311,17 +296,17 @@ body {
   }
 
   .main-content {
-    padding: 25px 30px;
+    padding: 20px 0 90px 90px;
     height: 100vh;
   }
 
   .content-grid {
-    grid-template-columns: 1fr 280px;
+    grid-template-columns: 1fr 355px;
     gap: 25px;
   }
 
   .right-section {
-    width: 280px;
+    width: 280px;   
   }
 
   .entryExit-cards {
@@ -331,11 +316,6 @@ body {
 
   .datescards-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
-
-  .articles {
-    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
   }
 }
@@ -369,11 +349,27 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
   }
+}
 
-  .articles {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px;
+/* === NUEVO BREAKPOINT PARA GRANDES PANTALLAS (1440px en adelante) === */
+@media (min-width: 1440px) {
+  .content-grid {
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    margin: 0 auto;
+    max-width: 1600px;
   }
+
+  .right-section {
+    width: 320px;
+  }
+
+  /* OPCIONAL: TESTEO VISUAL (quítalo luego) */
+  /*
+  body {
+    background-color: lightcoral;
+  }
+  */
 }
 
 /* === PANTALLAS EXTRA GRANDES (>= 1920px) === */
@@ -390,7 +386,6 @@ body {
   .content-grid {
     grid-template-columns: 1fr 320px;
     gap: 40px;
-    max-width: 1800px;
     margin: 0 auto;
   }
 
@@ -405,11 +400,6 @@ body {
 
   .datescards-container {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-  }
-
-  .articles {
-    grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
   }
 
@@ -442,7 +432,6 @@ body {
 @media (hover: none) and (pointer: coarse) {
   .entryExit-cards,
   .datescards-container,
-  .articles,
   .prices {
     gap: 15px;
   }
