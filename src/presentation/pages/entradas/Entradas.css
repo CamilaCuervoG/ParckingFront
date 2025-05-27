@@ -8,12 +8,26 @@
   flex-direction: column;
 }
 
+/*Banner*/
+
+.banner {
+  background: #CBD5E1;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 2px; /* Espacio debajo del banner */
+  margin-right: 35px;
+  margin-left: 13px;
+}
+
 /* Estilos para el formulario */
 .card-custom {
   background-color: white;
   padding: 30px;
-  border-radius: 15px !important;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 500px;
   margin-top: 20px;
@@ -44,7 +58,7 @@
 }
 
 .card-custom button:hover {
-  background: linear-gradient(to right, #0285c782, #7dd4fcb1);
+  background-color: #0056b3;
 }
 .card-custom input,
 .card-custom select {
@@ -56,7 +70,7 @@
 
 .card-custom button {
   padding: 10px;
-  background: linear-gradient(to right, #0285c782, #7dd4fcb1);
+  background-color: #063b5f;
   color: white;
   border: none;
   border-radius: 10px;
@@ -84,7 +98,7 @@ label{
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-height: 568px !important;              /* Ahora más larga antes de scroll */
+  max-height: 559px;              /* Ahora más larga antes de scroll */
   overflow-y: auto;               /* Scroll vertical cuando se exceda */
 }
 
@@ -98,18 +112,15 @@ label{
 
 .resumen-tabla th,
 .resumen-tabla td {
-  border: 1px solid #F1F5F9 !important;
+  border: 1px solid #ddd;
   padding: 15px;
   text-align: center;
   vertical-align: top;
-  color: #0C4A6E;
   word-wrap: break-word;
 }
 
 .resumen-tabla th {
-  background-color: #F1F5F9 !important;
-
-  /* background-color: #f0f0f0; */
+  background-color: #f0f0f0;
   font-weight: bold;
   font-size: 1.2rem;
 }
@@ -136,7 +147,7 @@ label{
 
 /* Mantener altura de la tabla incluso sin datos */
 .resumen-tabla tbody {
-  min-height: 398px !important;
+  min-height: 395px;
   display: block;
 }
 
@@ -146,27 +157,4 @@ label{
   display: table;
   width: 100%;
   table-layout: fixed;
-}
-
-.resumen-container h3{
-  color: #082F49;
-  justify-self: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.card-custom{
-  margin-bottom: 0 !important;
-}
-
-.banner-container {
-  max-width: 100%;
-  margin-right: 32px;
-  /* padding: 0 1.5rem; */
-  box-sizing: border-box;
-}
-
-.Statescard{
-  margin-top: 5px;
-  margin-bottom: 0;
 }

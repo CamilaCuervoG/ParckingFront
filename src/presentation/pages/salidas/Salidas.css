@@ -1,147 +1,147 @@
+/* ───────── Layout general ───────── */
 .main-content {
-    flex: 1;
-    padding-left: 100px;
-    padding-top: 10px;
-    height: 100vh;             /* Toma toda la altura disponible */
-    overflow-y: auto;          /* Permite hacer scroll interno */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Estilos para el formulario */
-  .card-custom {
-    background-color: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-    margin-top: 20px;
-  }
-  
-  .card-custom form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .card-custom input,
-  .card-custom select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-  
-  .card-custom button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .card-custom button:hover {
-    background-color: #0056b3;
-  }
-  .card-custom input,
-  .card-custom select {
-    padding: 10px;
-    margin: 20px 0 5px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  .card-custom button {
-    padding: 10px;
-    background-color: #063b5f;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .card-custom button:hover {
-    background-color: #abc1eb;
-  }
-  label{
-    margin-right: 9px;
-  }
-  
-  /* Mensaje de éxito o error */
-  .card-custom p {
-    font-size: 13px;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  /*Tabla dinamica*/
-  .resumen-container {
-    margin-top: 22px;
-    width: 100%;
-    padding: 20px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-height: 559px;              /* Ahora más larga antes de scroll */
-    overflow-y: auto;               /* Scroll vertical cuando se exceda */
-  }
-  
-  .resumen-tabla {
-    margin-top: 15px;
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    table-layout: fixed;
-  }
-  
-  .resumen-tabla th,
-  .resumen-tabla td {
-    border: 1px solid #ddd;
-    padding: 15px;
-    text-align: center;
-    vertical-align: top;
-    word-wrap: break-word;
-  }
-  
-  .resumen-tabla th {
-    background-color: #f0f0f0;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
-  .resumen-tabla th:nth-child(1),
-  .resumen-tabla td:nth-child(1) {
-    width: 30%;
-  }
-  
-  .resumen-tabla th:nth-child(2),
-  .resumen-tabla td:nth-child(2) {
-    width: 30%;
-  }
-  
-  .resumen-tabla th:nth-child(3),
-  .resumen-tabla td:nth-child(3) {
-    width: 40%;
-  }
-  
-  .resumen-tabla td[colspan="3"] {
-    text-align: center;
-    font-style: italic;
-  }
-  
-  /* Mantener altura de la tabla incluso sin datos */
-  .resumen-tabla tbody {
-    min-height: 388px;
-    display: block;
-  }
-  
-  /* Asegurar scroll funcione correctamente cuando haya muchas filas */
-  .resumen-tabla thead,
-  .resumen-tabla tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
+  flex: 1;
+  padding-left: 100px;
+  padding-top: 10px;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ───────── Banner ───────── */
+.banner {
+  background: #CBD5E1;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 35px 2px 13px;
+}
+
+/* ───────── Tarjeta (formulario) ───────── */
+.card-custom {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.card-custom form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card-custom input {
+  padding: 10px;
+  margin: 20px 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.card-custom .btn-submit {
+  padding: 10px;
+  background: #063b5f;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.card-custom .btn-submit:hover { background: #abc1eb; }
+
+label { margin-right: 9px; }
+
+.card-custom p { font-size: 13px; font-weight: bold; text-align: center; }
+
+/* ───────── Tabla (7 columnas, scroll X-Y) ───────── */
+.resumen-container {
+  margin-top: 22px;
+  width: 100%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-height: 559px;    /* alto del panel */
+  overflow: auto;       /* scroll vertical + horizontal */
+}
+
+/* div que realmente scrollea */
+.tabla-scroll {
+  max-height: 430px;       /* ALTO visible: ajusta a tu gusto   */
+  overflow-x: auto ;        /* barras X   */
+  overflow-y: auto ;        /* barras Y   */
+}
+
+.resumen-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  table-layout: fixed;  /* para que respete los widths */
+}
+
+/* cabecera */
+.resumen-tabla thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.resumen-tabla th,
+.resumen-tabla td {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+  /*word-wrap: break-word;*/
+}
+
+.resumen-tabla th {
+  background: #f0f0f0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* cuerpo: se hace bloque para permitir scroll Y manteniendo cabecera */
+.resumen-tabla tbody {
+  display: block;
+  max-height: 430px;     /* ajusta según tu diseño */
+  overflow-y: auto;
+}
+
+/* filas del cuerpo necesitan display:table para respetar widths */
+.resumen-tabla tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* —— anchuras proporcionales —— */
+.resumen-tabla th:nth-child(1),
+.resumen-tabla td:nth-child(1) { width: 30% !important; }
+
+.resumen-tabla th:nth-child(2),
+.resumen-tabla td:nth-child(2) { width: 38% !important; }
+
+.resumen-tabla th:nth-child(3),
+.resumen-tabla td:nth-child(3) { width: 40%!important; }
+
+.resumen-tabla th:nth-child(4),
+.resumen-tabla td:nth-child(4) { width: 40%; }
+
+.resumen-tabla th:nth-child(5),
+.resumen-tabla td:nth-child(5) { width: 28%; }
+
+.resumen-tabla th:nth-child(6),
+.resumen-tabla td:nth-child(6) { width: 30%; }
+
+/* mensaje “sin registros” */
+.resumen-tabla td[colspan="6"] {
+  text-align: center;
+  font-style: italic;
+}
