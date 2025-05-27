@@ -10,6 +10,7 @@ import StatsCard from '../../components/ui/cards/StatsCard/StatsCards';
 import Banner from '../../components/layout/banner/Banner';
 import ParkingSystem from '../../components/ui/cards/ParkingSystem/ParkingSystem';
 import GestionarConfiguracion from '../../../domain/usecases/gestionarConfiguración';
+import { listEntries } from '../../../services/parkingService';
 import './Index.css';
 import ExitCard from '../../components/ui/cards/ExitCard/ExitCard';
 
@@ -21,16 +22,43 @@ function Index() {
     columnas: 5
   });
 
+  // ------------------------ Contadores ------------------------
+  const [ocupadas, setOcupadas] = useState(0);
+  const [disponibles, setDisponibles] = useState(0);
+
+  // Actualiza contadores consultando la base de datos
+  const refreshCounters = async () => {
+    try {
+      const { data } = await listEntries();          // GET /parkings/entries
+      const usadas  = data.length;
+      const libres  = Math.max(parkingConfig.totalEspacios - usadas, 0);
+
+      setOcupadas(usadas);
+      setDisponibles(libres);
+    } catch (err) {
+      console.error('No se pudo actualizar contadores', err);
+    }
+  };
+
+  // Llama a refreshCounters al montar y cada 10 s
+  useEffect(() => {
+    if (!parkingConfig.totalEspacios) return;
+
+    refreshCounters();                       // primera llamada
+    const id = setInterval(refreshCounters, 10000);
+    return () => clearInterval(id);
+  }, [parkingConfig]);
+
+  // Carga de configuración almacenada
   useEffect(() => {
     const config = GestionarConfiguracion.obtenerConfiguracionParking();
-    if (config) {
-      setParkingConfig(config);
-    }
+    if (config) setParkingConfig(config);
   }, []);
 
   return (
     <div className="dashboard">
       <Sidebar />
+
       <div className="main-content">
         <Header />
 
@@ -49,15 +77,17 @@ function Index() {
             <div className="entryExit-cards">
               <EntryCard 
                 title="Registra Entradas" 
-                current={30} 
-                total={60} 
+                current={disponibles} 
+                totalSlots={parkingConfig.totalEspacios} 
                 color="deepSkyBlue" 
+                onSuccess={refreshCounters} 
               />
               <ExitCard 
                 title="Registra Salidas" 
-                current={10} 
-                total={40} 
+                current={ocupadas} 
+                total={parkingConfig.totalEspacios} 
                 color="midnightBlue" 
+                onSuccess={refreshCounters} 
               />
             </div>
 
@@ -119,7 +149,7 @@ function Index() {
                 title="Precio hora" 
                 autoPrice={7000} 
                 motoPrice={5000} 
-              />           
+              />
               <PriceCard 
                 title="Precio día" 
                 autoPrice={35000} 
