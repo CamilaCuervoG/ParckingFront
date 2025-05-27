@@ -1,0 +1,33 @@
+.main-content {
+  padding: 40px;
+  min-height: 100vh;
+  margin-top: 20px; 
+  margin-right: 200px;
+  background-color: transparent;
+}
+
+.main-content h1 {
+  font-size: 28px;
+  color: #10386c;
+  margin-bottom: 15px;
+}
+
+.main-content p {
+  font-size: 18px;
+  color: #051e3e;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.team-section,
+.mission-section,
+.vision-section {
+  margin-top: 30px;
+}
+
+.team-section h2,
+.mission-section h2,
+.vision-section h2 {
+  color: #10386c;
+  margin-bottom: 10px;
+}
