@@ -1,49 +1,62 @@
-import React, { useState, useEffect } from "react";
-import Sidebar from "../../components/layout/sidebar/Sidebar";  // Correcto
-import Header from "../../components/layout/header/Header";  // Correcto
-import StatsCard from "../../components/ui/cards/StatsCard/StatsCards";
-import TablaSalidas from "../../components/ui/widgets/tablaSalidas/TablaSalidas";  // Nombre actualizado a TablaSalidas
-import "../../pages/index/Index.css";
-import "../../pages/entradas/Entradas.css";
-import Banner from "../../components/layout/banner/Banner";
-// import './Salidas.css';
+import React, { useState, useEffect } from 'react';
+
+import Sidebar      from '../../components/layout/sidebar/Sidebar';
+import Header       from '../../components/layout/header/Header';
+import StatsCard    from '../../components/ui/cards/StatsCard/StatsCards';
+import TablaSalidas from '../../components/ui/widgets/tablaSalidas/TablaSalidas';
+
+import {
+  listEntries,      // GET  /parkings/entries
+  listExits,        // GET  /parkings/exits
+  closeEntry        // PUT  /parkings/:id/exit
+} from '../../../services/parkingService';
+
+import '../../pages/index/Index.css';
+import './Salidas.css';
 
 function Salidas() {
-  const [placa, setPlaca] = useState("");
-  const [tipo, setTipo] = useState("Automóvil");
-  const [mensaje, setMensaje] = useState("");
-  const [salidas, setSalidas] = useState([]);
+  const [placa, setPlaca]       = useState('');
+  const [mensaje, setMensaje]   = useState('');
+  const [salidas, setSalidas]   = useState([]);
 
-  const placaRegex = /^[A-Za-z]{3}-\d{4}$/;
+  /* ───── cargar salidas al montar ───── */
+  useEffect(() => { cargarSalidas(); }, []);
 
-  // Cargar salidas guardadas al montar el componente
-  useEffect(() => {
-    const salidasGuardadas = JSON.parse(localStorage.getItem("salidas")) || [];
-    setSalidas(salidasGuardadas);
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!placaRegex.test(placa)) {
-      setMensaje("⚠️ La placa debe seguir el formato: ABC-1234");
-      return;
+  const cargarSalidas = async () => {
+    try {
+      const { data } = await listExits();
+      setSalidas(data);
+    } catch (err) {
+      console.error('Error al cargar salidas:', err.message);
     }
+  };
 
-    const nuevaSalida = {
-      placa,
-      tipo,
-      fecha: new Date().toLocaleString("es-CO"),
-    };
+  /* ───── registrar salida ───── */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMensaje('');
 
-    const salidasActuales = JSON.parse(localStorage.getItem("salidas")) || [];
-    const nuevasSalidas = [...salidasActuales, nuevaSalida];
+    try {
+      /* busca entrada abierta con la placa escrita */
+      const { data: abiertas } = await listEntries();
+      const registro = abiertas.find(
+        (r) => r.plate === placa.trim().toUpperCase()
+      );
 
-    localStorage.setItem("salidas", JSON.stringify(nuevasSalidas));
-    setSalidas(nuevasSalidas);
-    setMensaje("✅ Salida registrada correctamente.");
-    setPlaca("");
-    setTipo("Automóvil");
+      if (!registro) {
+        setMensaje('⚠️ No hay entrada activa con esa placa');
+        return;
+      }
+
+      /* cierra entrada y calcula valor en backend */
+      await closeEntry(registro.id);
+
+      await cargarSalidas();
+      setPlaca('');
+      setMensaje('✅ Salida registrada correctamente');
+    } catch (err) {
+      setMensaje(err.response?.data?.msg || 'Error al registrar salida');
+    }
   };
 
   return (
@@ -51,51 +64,32 @@ function Salidas() {
       <Sidebar />
       <div className="main-content">
         <Header />
-        <div className="banner-container">
-        <Banner message="Registrar salida de vehículos"/>
-        </div>
+
+        <div className="banner">Registrar salida de vehículos</div>
 
         <div className="content-grid">
+          {/* Formulario */}
           <section className="left-section">
             <div className="card-custom">
               <h3>Formulario de Salida</h3>
               <form onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="placa">Placa:</label>
-                  <input
-                    id="placa"
-                    type="text"
-                    value={placa}
-                    onChange={(e) => setPlaca(e.target.value)}
-                    placeholder="Ingrese la placa"
-                    required
-                    aria-label="Placa del vehículo"
-                  />
-                </div>
+                <label htmlFor="placa">Placa:</label>
+                <input
+                  id="placa"
+                  value={placa}
+                  onChange={(e) => setPlaca(e.target.value)}
+                  placeholder="Ingrese la placa"
+                  required
+                />
 
-                <div>
-                  <label htmlFor="tipo">Tipo de vehículo:</label>
-                  <select
-                    id="tipo"
-                    value={tipo}
-                    onChange={(e) => setTipo(e.target.value)}
-                    aria-label="Tipo de vehículo"
-                  >
-                    <option value="Automóvil">Automóvil</option>
-                    <option value="Motocicleta">Motocicleta</option>
-                  </select>
-                </div>
-
-                <button type="submit" className="btn-submit">
-                  Registrar Salida
-                </button>
+                <button className="btn-submit">Registrar Salida</button>
               </form>
 
               {mensaje && (
                 <p
                   style={{
-                    marginTop: "10px",
-                    color: mensaje.includes("correctamente") ? "green" : "red",
+                    marginTop: '10px',
+                    color: mensaje.includes('✅') ? 'green' : 'red'
                   }}
                 >
                   {mensaje}
@@ -103,18 +97,19 @@ function Salidas() {
               )}
             </div>
 
-            <div className="Statescard">
+            <div className="datescards-container">
               <StatsCard
                 title="Salidas del día"
-                entries={80}
-                exits={160}
+                entries={salidas.length}
+                exits={0}
                 footer="Datos del día de hoy"
               />
             </div>
           </section>
 
+          {/* Tabla */}
           <aside className="right-section">
-            <TablaSalidas salidas={[...salidas].reverse()} />  {/* Ahora está usando TablaSalidas para mostrar las salidas */}
+            <TablaSalidas salidas={[...salidas].reverse()} onSalida={closeEntry} />
           </aside>
         </div>
       </div>

@@ -1,33 +1,77 @@
+/* ------------------------------------------------------------------
+   Historial.css — estilos exclusivos de la vista Historial
+   ------------------------------------------------------------------ */
+
+/* 1. CONTENEDOR PRINCIPAL ----------------------------------------- */
 .main-content {
-    flex: 1;
-    padding-left: 100px;
-    padding-top: 10px;
-    height: 100vh;             /* Toma toda la altura disponible */
-    overflow-y: auto;          /* Permite hacer scroll interno */
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  padding-left: 100px;
+  padding-top: 10px;
+  height: 100vh;          /* ocupa toda la altura del dashboard      */
+  overflow: auto;       /* scroll vertical global                  */
+  display: flex;
+  flex-direction: column;
 }
 
-.tabla-scroll {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 10px;
+/* 2. CONTENEDOR CON SCROLL POR TABLA ------------------------------ */
+.tabla-scroll,
+.tabla-scroll-history {   /* alias legacy — por si quedó en el código */
+  max-height: 380px;      /* visible antes de que aparezca el scroll  */
+  overflow: auto ;         /* vertical + horizontal cuando sea necesario */
+  margin-bottom: 32px;    /* separación entre tablas                  */
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
-.resumen-tabla {
-    width: 100%;
-    border-collapse: collapse;
+/* 3. TABLAS ------------------------------------------------------- */
+.resumen-tabla,
+.resumen-tabla-history {  /* alias legacy                             */
+  width: 100%;
+  min-width: 720px;       /* fuerza barra horizontal si excede ancho  */
+  border-collapse: collapse;
+  font-size: 1rem;
+  table-layout: auto;
 }
 
-.resumen-tabla th, .resumen-tabla td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+/* Celdas */
+.resumen-tabla th,
+.resumen-tabla td,
+.resumen-tabla-history th,
+.resumen-tabla-history td {
+  border: 1px solid #ddd;
+  padding: 12px 14px;
+  text-align: center;
+  word-wrap: break-word;
 }
 
-.card-custom{
-    margin-top: 0px;
-    margin-bottom: 25px;
-    border-radius: 30px;
-    margin-right: 30px
+/* Encabezados */
+.resumen-tabla thead th,
+.resumen-tabla-history thead th {
+  white-space: nowrap;    /* evita saltos de línea en títulos         */
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f5f5f5;
 }
+
+/* Zebra-striping opcional */
+.resumen-tabla tbody tr:nth-child(even),
+.resumen-tabla-history tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* 4. CONTENEDOR INTERNO QUE PONEN LOS COMPONENTES ----------------- */
+.resumen-container {
+  width: 100%;
+  display: block;
+}
+
+.resumen-container h3 {
+  margin: 12px 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------
+   Fin de Historial.css
+   ------------------------------------------------------------------ */

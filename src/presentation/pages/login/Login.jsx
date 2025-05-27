@@ -1,129 +1,91 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-
-import { AuthRepositoryImpl } from '../../../domain/repositories/AuthRepositoryImpl';
-import { loginUser }   from '../../../domain/usecases/loginUser';
-import { registerUser } from '../../../domain/usecases/registerUser';
-
+import {
+  login as loginApi,
+  register as registerApi
+} from '../../../services/authService';
 import './Login.css';
-
-const authRepository = new AuthRepositoryImpl();
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError]       = useState('');
   const navigate = useNavigate();
-  const { setUserSession } = useAuth();          // ← actualiza contexto
 
-  /* ----- SUBMIT (login o registro) ----- */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     const data = Object.fromEntries(new FormData(e.target));
 
-    if (isSignUp) {
-      /* -------- Registro -------- */
-      const ok = await registerUser(authRepository)(data.email, data.password);
-      if (ok) {
-        alert('✅ Registro exitoso. Ahora inicia sesión.');
+    try {
+      if (isSignUp) {
+        await registerApi(data.name, data.email, data.password);
         setIsSignUp(false);
-      }
-    } else {
-      /* -------- Login -------- */
-      const ok = await loginUser(authRepository)(data.email, data.password);
-      if (ok) {
-        // 1️⃣ Guardar al usuario en el contexto
-        setUserSession({ email: data.email });
-
-        // 2️⃣ Redirigir al dashboard
-        navigate('/index', { replace: true });
+        alert('¡Registro exitoso, inicia sesión!');
       } else {
-        alert('❌ Credenciales incorrectas');
+        const { data: res } = await loginApi(data.email, data.password);
+        localStorage.setItem('token', res.token);
+        navigate('/index');
       }
+    } catch (err) {
+      setError(err.response?.data?.msg || 'Error en la operación');
     }
   };
 
-  /* ----- UI ----- */
   return (
     <div className={`container ${isSignUp ? 'toggle' : ''}`}>
-      {/* ---------- Formulario Iniciar Sesión ---------- */}
+      {/* ----------- INICIAR SESIÓN ----------- */}
       <div className="container__form">
         <form className="sign__in" onSubmit={handleSubmit}>
           <h2>Iniciar Sesión</h2>
 
           <div className="container__input">
             <ion-icon name="mail-open-outline"></ion-icon>
-            <input
-              type="text"
-              name="email"
-              placeholder="Correo Electrónico"
-              required
-            />
+            <input type="email" name="email" placeholder="Correo Electrónico" required />
           </div>
 
           <div className="container__input">
             <ion-icon name="lock-closed-outline"></ion-icon>
-            <input
-              type="password"
-              name="password"
-              placeholder="Contraseña"
-              required
-            />
+            <input type="password" name="password" placeholder="Contraseña" required />
           </div>
 
-          <a href="#">¿Olvidaste tu contraseña?</a>
+          {error && !isSignUp && <p className="error">{error}</p>}
+
           <button className="button">Iniciar Sesión</button>
         </form>
       </div>
 
-      {/* ---------- Formulario Registro ---------- */}
+      {/* ----------- REGISTRO ----------- */}
       <div className="container__form">
         <form className="sign__up" onSubmit={handleSubmit}>
           <h2>Registrarse</h2>
 
           <div className="container__input">
             <ion-icon name="person-outline"></ion-icon>
-            <input
-              type="text"
-              name="name"
-              placeholder="Nombre"
-              required
-            />
+            <input type="text" name="name" placeholder="Nombre" required />
           </div>
 
           <div className="container__input">
             <ion-icon name="mail-open-outline"></ion-icon>
-            <input
-              type="text"
-              name="email"
-              placeholder="Correo Electrónico"
-              required
-            />
+            <input type="email" name="email" placeholder="Correo Electrónico" required />
           </div>
 
           <div className="container__input">
             <ion-icon name="lock-closed-outline"></ion-icon>
-            <input
-              type="password"
-              name="password"
-              placeholder="Contraseña"
-              required
-            />
+            <input type="password" name="password" placeholder="Contraseña" required />
           </div>
+
+          {error && isSignUp && <p className="error">{error}</p>}
 
           <button className="button">Registrarse</button>
         </form>
       </div>
 
-      {/* ---------- Panel de Bienvenida ---------- */}
+      {/* ----------- BIENVENIDA ----------- */}
       <div className="container__welcome">
         <div className="welcome__up welcome">
           <h3>¡Bienvenido!</h3>
           <p>Regístrese con sus datos personales para entrar a Parking JCA</p>
-          <button
-            className="button"
-            onClick={() => setIsSignUp(true)}
-            type="button"
-          >
+          <button className="button" type="button" onClick={() => setIsSignUp(true)}>
             Registrarse
           </button>
         </div>
@@ -131,11 +93,7 @@ export default function Login() {
         <div className="welcome__in welcome">
           <h3>¡Hola!</h3>
           <p>Ingrese sus datos personales para entrar a Parking JCA</p>
-          <button
-            className="button"
-            onClick={() => setIsSignUp(false)}
-            type="button"
-          >
+          <button className="button" type="button" onClick={() => setIsSignUp(false)}>
             Iniciar Sesión
           </button>
         </div>
@@ -143,3 +101,4 @@ export default function Login() {
     </div>
   );
 }
+

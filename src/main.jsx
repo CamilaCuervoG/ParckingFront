@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './app/App/App'
+import { BrowserRouter } from 'react-router-dom';
 
-import './app/global.css';        // CSS base (colores, tipografías, variables)
+import App from './app/App/App';          // tu componente de rutas
 
-// 3 CSS originales, SIN cambiar nada
-import './presentation/pages/login/Login.css'
+/* 3 CSS originales */
+import './presentation/pages/login/Login.css';
 import './presentation/pages/index/Index.css';
 import './presentation/pages/start/Start.css';
 
-// reset + variables globales
+/* reset + variables globales */
+import './app/global.css';
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
-
